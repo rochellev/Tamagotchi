@@ -7,6 +7,7 @@ import { tamagotchi } from './hungrytamagotchi.js';
 let grylls = tamagotchi;
 grylls.setHunger();
 
+
 $(document).ready(function() {
   $('#feedTamagotchi').click(function(event) {
     event.preventDefault();
@@ -27,6 +28,18 @@ $('#feedTama').click(function() {
    }
  }
 
+   // $('#outputHungerLevel').html(`<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:${grylls.foodLevel}%;height:20px"></div>`);
+setInterval(function(){
+  let danger
+  if(grylls.foodLevel <= 20){
+    danger = "bg-danger"
+  }else{
+    danger = "bg-success"
+  }
+  $('#outputHungerLevel').html(`<div class="progress-bar ${danger} progress-bar-striped progress-bar-animated" aria-valuenow="${grylls.foodLevel}"; style="width:${grylls.foodLevel}%;height:20px">${grylls.foodLevel}%</div>`);
+}, 1000)
+
+
  try {
    const isAlive = isAliveCheck();
    if (isAlive instanceof Error) {
@@ -34,9 +47,8 @@ $('#feedTama').click(function() {
      throw RangeError("foodLevel too low");
    }else {
      console.log("you're safe");
-     $('#hungerLevel').html("<div> The tamagotchi's hunger level is " + grylls.foodLevel +"</div>");
-     let w = grylls.foodLevel
-     $('#outputHungerLevel').html(`<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:${w}%;height:20px"></div>`);
+     // $('#hungerLevel').html("<div> The tamagotchi's hunger level is " + grylls.foodLevel +"</div>");
+
    }
  } catch (error) {
     console.error(`Red alert! We have an error: ${error.message}`);
