@@ -1,10 +1,10 @@
-# Weekday Calculator
-### By Rochelle Roberts
+# Tamagotchi
+### By Rochelle Roberts and Joseph Tubridy
 
 ---
 
 ## Description
-* This program calculates the day for any given date.
+* Can you keep your Tamagotchi alive? Feed and play with your pet
 
 
 ## Technologies Used
@@ -19,7 +19,7 @@
 * Clone repo, from the root directory, install dependencies.
 
 ```sh
-$ git clone https://github.com/rochellev/weekdayCalculator.git
+$ git clone
 $ cd weekdayCalculator
 $ npm install
 ```
@@ -28,5 +28,4 @@ $ npm install
 
 | Behaviors       | Input          | Output      |
 | ---------------- |:------------:| :--------------:|
-| type date and return day of the week | 06/26/2019 | Wednesday |
-| invalid date results in message | 13/44/2020 | output is "Date is not defined" |
+| When click on "Feed" button, Tamagotchi Fullness bar increases | click on Feed button | increases Fullness bar |

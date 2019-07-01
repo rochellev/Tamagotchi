@@ -22,27 +22,17 @@ $('#feedTama').click(function() {
  // grylls.feed(12); --- broken because somehow not a function
  function isAliveCheck() {
    if (grylls.foodLevel <= 0) {
+     $('#death').append('\u{1F480}');
+     console.log('dead');
      return new Error("You're dead, food level too low");
    } else if (grylls.foodLevel >= 100){
      alert("Your Tamagotchi had an accident"+'\u{1F4A9}');
+    $('#floor').append('\u{1F4A9}');
      return grylls.foodLevel = 100;
    } else {
      return true;
    }
-
  }
-
-   // $('#outputHungerLevel').html(`<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:${grylls.foodLevel}%;height:20px"></div>`);
-setInterval(function(){
-  let danger
-  if(grylls.foodLevel <= 20){
-    danger = "bg-danger"
-  }else{
-    danger = "bg-success"
-  }
-  $('#outputHungerLevel').html(`<div class="progress-bar ${danger} progress-bar-striped progress-bar-animated" aria-valuenow="${grylls.foodLevel}"; style="width:${grylls.foodLevel}%;height:20px">${grylls.foodLevel}%</div>`);
-}, 1000)
-
 
  try {
    const isAlive = isAliveCheck();
@@ -51,13 +41,19 @@ setInterval(function(){
      throw RangeError("foodLevel too low");
    }else {
      console.log("you're safe");
-     // $('#hungerLevel').html("<div> The tamagotchi's hunger level is " + grylls.foodLevel +"</div>");
-
    }
  } catch (error) {
     console.error(`Red alert! We have an error: ${error.message}`);
  }
+setInterval(function(){
+   let danger
+   if(grylls.foodLevel <= 20){
+     danger = "bg-danger"
+   }else{
+     danger = "bg-success"
+   }
+   $('#outputHungerLevel').html(`<div class="progress-bar ${danger} progress-bar-striped progress-bar-animated" aria-valuenow="${grylls.foodLevel}"; style="width:${grylls.foodLevel}%;height:20px">${grylls.foodLevel}%</div>`);
+ }, 1000)
+
 });
-
-
 });
