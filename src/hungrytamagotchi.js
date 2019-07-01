@@ -5,7 +5,7 @@ export let tamagotchi = {
       this.foodLevel--;
       if (this.didYouGetEaten() == true) {
         clearInterval(hungerInterval);
-        return "You got eaten!";
+        return "You let your Tamagotchi DIE!";
       }
     }, 1000);
   },
@@ -17,10 +17,13 @@ export let tamagotchi = {
     }
   },
   feed: function(amount) {
+    if(this.foodLevel >= 100){
+      return this.foodLevel = 100;
+    }
     let that = this;
     return function(food) {
       that.foodLevel += amount
-      return `The bear ate the ${food}! Food level goes up ${amount}!`
+      return `Your Tamagotchi ate ${food}! Food level goes up ${amount}!`
     }
   }
 };

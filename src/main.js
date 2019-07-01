@@ -23,9 +23,13 @@ $('#feedTama').click(function() {
  function isAliveCheck() {
    if (grylls.foodLevel <= 0) {
      return new Error("You're dead, food level too low");
+   } else if (grylls.foodLevel >= 100){
+     alert("Your Tamagotchi had an accident"+'\u{1F4A9}');
+     return grylls.foodLevel = 100;
    } else {
      return true;
    }
+
  }
 
    // $('#outputHungerLevel').html(`<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:${grylls.foodLevel}%;height:20px"></div>`);
