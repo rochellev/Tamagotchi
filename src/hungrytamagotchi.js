@@ -1,13 +1,10 @@
 export let tamagotchi = {
   foodLevel: 10,
   setHunger: function() {
-    const hungerInterval = setInterval(() => {
       this.foodLevel--;
       if (this.didYouGetEaten() == true) {
-        clearInterval(hungerInterval);
         return "You let your Tamagotchi DIE!";
       }
-    }, 1000);
   },
   didYouGetEaten: function() {
     if (this.foodLevel > 0) {

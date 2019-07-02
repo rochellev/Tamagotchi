@@ -5,8 +5,6 @@ import './styles.css';
 import { tamagotchi } from './hungrytamagotchi.js';
 
 let grylls = tamagotchi;
-grylls.setHunger();
-
 
 $(document).ready(function() {
   $('#feedTamagotchi').click(function(event) {
@@ -20,6 +18,7 @@ console.log("after "+grylls.foodLevel);
 $('#feedTama').click(function() {
  grylls.eatMedium();
  // grylls.feed(12); --- broken because somehow not a function
+ });
  function isAliveCheck() {
    if (grylls.foodLevel <= 0) {
      $('#death').append('\u{1F480}');
@@ -34,26 +33,35 @@ $('#feedTama').click(function() {
    }
  }
 
- try {
-   const isAlive = isAliveCheck();
-   if (isAlive instanceof Error) {
-     console.error(isAlive.message);
-     throw RangeError("foodLevel too low");
-   }else {
-     console.log("you're safe");
-   }
- } catch (error) {
-    console.error(`Red alert! We have an error: ${error.message}`);
- }
-setInterval(function(){
-   let danger
+// it will check for low food level, output hunger bar,
+// also maybe update food level every second
+let update_loop = setInterval(secCheck, 1000);
+  //decrement food foodLevel
+
+function secCheck(){
+// updating the progress bar
+grylls.setHunger();
+   let danger;
    if(grylls.foodLevel <= 20){
      danger = "bg-danger"
    }else{
      danger = "bg-success"
    }
    $('#outputHungerLevel').html(`<div class="progress-bar ${danger} progress-bar-striped progress-bar-animated" aria-valuenow="${grylls.foodLevel}"; style="width:${grylls.foodLevel}%;height:20px">${grylls.foodLevel}%</div>`);
- }, 1000)
+   try {
+     const isAlive = isAliveCheck();
+     if (isAlive instanceof Error) {
+       console.error(isAlive.message);
+       throw RangeError("foodLevel too low");
+     }else {
+       console.log("you're safe");
+     }
+   } catch (error) {
+     console.error(`Red alert! We have an error: ${error.message}`);
+     clearInterval(update_loop);
+   }
+ }
 
-});
+
+
 });
